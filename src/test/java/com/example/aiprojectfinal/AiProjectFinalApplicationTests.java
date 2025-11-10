@@ -1,0 +1,15 @@
+package com.example.aiprojectfinal;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class AiProjectFinalApplicationTests
+{
+
+    @Test
+    void contextLoads()
+    {
+    }
+
+}
