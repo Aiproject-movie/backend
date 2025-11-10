@@ -1,5 +1,5 @@
-package config;
 
+package config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class WebClientConfig {
 }
     @Bean
     public WebClient openAiClient(WebClient.Builder builder) {
-        return builder
+        return builder.clone()
                 .baseUrl("https://api.openai.com/v1")
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + openAiKey)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -34,7 +34,7 @@ public class WebClientConfig {
 
     @Bean
     public WebClient tmdbClient(WebClient.Builder builder) {
-        return builder
+        return builder.clone()
                 .baseUrl("https://api.themoviedb.org/3")
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + tmdbKey)
                 .build();
