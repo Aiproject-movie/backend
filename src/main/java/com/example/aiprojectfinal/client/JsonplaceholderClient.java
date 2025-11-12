@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
-//TODO: tror ikke at Jsonplaceholder er relevant ger i denne - Osman bruger den heller ikke i hans Chatgpt demo
+//T tror ikke at Jsonplaceholder er relevant ger i denne - Osman bruger den heller ikke i hans Chatgpt demo
 @Service
 public class JsonplaceholderClient {
 
