@@ -17,10 +17,8 @@ public class WebClientConfig {
     }
 
     @Bean
-    public WebClient openAiClient(
-            WebClient.Builder builder,
-            @Value("${openai.api.key}") String apiKey
-    ) {
+    WebClient openAiWebClient(WebClient.Builder builder,
+                              @Value("${openai.api.key}") String apiKey) {
         return builder.clone()
                 .baseUrl("https://api.openai.com/v1")
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
@@ -28,15 +26,19 @@ public class WebClientConfig {
                 .build();
     }
 
+
     @Bean
-    public WebClient tmdbClient(
-            WebClient.Builder builder,
-            @Value("${tmdb.api.key}") String apiKey
-    ) {
+    WebClient tmdbWebClient(WebClient.Builder builder,
+                            @Value("${tmdb.api.key}") String apiKey) {
         return builder.clone()
                 .baseUrl("https://api.themoviedb.org/3")
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build();
+    }
+
+    @Bean
+    WebClient jsonPlaceholderClient(WebClient.Builder b) {
+        return b.clone().baseUrl("https://jsonplaceholder.typicode.com").build(); //ændres til andet api! >-<
     }
 }
