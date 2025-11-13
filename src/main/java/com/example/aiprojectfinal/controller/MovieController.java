@@ -1,4 +1,4 @@
-package controller;
+package com.example.aiprojectfinal.controller;
 
 import com.example.aiprojectfinal.dto.MovieDto;
 import com.example.aiprojectfinal.service.AiClientService;
