@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
+//Tror ikke at Jsonplaceholder er relevant ger i denne - Osman bruger den heller ikke i hans Chatgpt demo
 @Service
 public class JsonplaceholderClient {
 
@@ -29,13 +30,5 @@ public class JsonplaceholderClient {
 
 
         public record ApiClient (String title, String overview, String posterUrl) {}
-
-
-
-
-
-        //TO DO: Lave vores flux og Mono
-
-
 }
 
