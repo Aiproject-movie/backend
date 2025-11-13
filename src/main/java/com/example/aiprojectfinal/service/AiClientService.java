@@ -29,7 +29,7 @@ public class AiClientService{
         return tmdbWebClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/3/movie/popular")
+                        .path("/movie/popular")
                         .queryParam("api_key", "a7ecf80fb48396b1ba8342c9cef45439") //dette er vores Api key, som står i Https
                         .build())
                 .retrieve()
