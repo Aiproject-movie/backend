@@ -3,6 +3,7 @@ package com.example.aiprojectfinal.service;
 import com.example.aiprojectfinal.client.OpenAiClient;
 import com.example.aiprojectfinal.dto.MovieDto;
 import com.example.aiprojectfinal.dto.TmdbResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -13,9 +14,12 @@ import java.util.List;
 
 @Service
 public class AiClientService{
+
+    @Autowired
     private final WebClient tmdbWebClient;
 
-    public AiClientService(@Qualifier("tmdbWebClient") WebClient tmdbWebClient) {
+    public AiClientService(
+            @Qualifier("tmdbWebClient") WebClient tmdbWebClient) {
         this.tmdbWebClient = tmdbWebClient;
     }
 
@@ -40,7 +44,8 @@ public class AiClientService{
                 ));
     }
 
-        //Hvis vi gerne vil have returneret hele listen og ikke kun Populære film
+
+    //Hvis vi gerne vil have returneret hele listen og ikke kun Populære film
         public Mono<List<MovieDto>> getPopularMoviesList() {
             return getPopularMovies().collectList();
         }
