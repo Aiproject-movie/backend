@@ -40,10 +40,5 @@ public class WebClientConfig {
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
-    }
-
-//    @Bean
-//    WebClient jsonPlaceholderClient(WebClient.Builder b) {
-//        return b.clone().baseUrl("https://jsonplaceholder.typicode.com").build(); //ændres til andet api! >-<
-
+}
 

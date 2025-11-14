@@ -1,9 +1,12 @@
 package com.example.aiprojectfinal.controller;
 
 import com.example.aiprojectfinal.client.MovieClient;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+
 
 @RestController
 @RequestMapping("/api/prompt")
@@ -22,16 +25,16 @@ public class PromptController {
     public record ResponseDto(String response) {}
 
     @PostMapping
-    public Mono<ResponseEntity<ResponseDto>> ask(@RequestBody QueryRequest queryRequest) {
+    public Mono<ResponseDto> ask(@RequestBody QueryRequest queryRequest) {
         String prompt = queryRequest.prompt();  // det brugeren skrev i chatten
 
         int page = 1;
-        String language = "da-DK";  // eller "da-DK" hvis du vil
-        String region = "DK";       // valgfrit – kan også være "" eller "US"
+        String language = "da-DK";
+        String region = "DK";
 
         return movieClient.streamPopular(page, language, region)
-                .take(5)                         // kun de 5 første film
-                .collectList()                   // saml dem til en List<TmdbMovie>
+                .take(5)
+                .collectList()
                 .map(movies -> {
                     StringBuilder sb = new StringBuilder();
 
@@ -53,17 +56,15 @@ public class PromptController {
 
                         sb.append("  ⭐ ")
                                 .append(String.format("%.1f", m.vote_average()))
-                                .append("/10");
-
-                        sb.append("\n");
+                                .append("/10")
+                                .append("\n");
                     }
 
-                    return ResponseEntity.ok(new ResponseDto(sb.toString()));
+                    return new ResponseDto(sb.toString());
                 })
                 .onErrorResume(ex ->
-                        Mono.just(ResponseEntity
-                                .status(500)
-                                .body(new ResponseDto("Der skete en fejl mod TMDB: " + ex.getMessage())))
+                        // I stedet for at sende 500, sender vi en "venlig" fejltekst i response-feltet
+                        Mono.just(new ResponseDto("Der skete en fejl mod TMDB: " + ex.getMessage()))
                 );
     }
 }

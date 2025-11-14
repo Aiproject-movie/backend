@@ -1,9 +1,8 @@
-const BASE_URL = "http://localhost:8080";
+const API_BASE = ""; // samme origin (localhost:8080)
 
 export default async function askAI(prompt) {
-    const response = await fetch(BASE_URL + "/api/prompt", {
+    const response = await fetch(API_BASE + "/api/movies/popular-list", {
         method: "POST",
-        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
@@ -14,5 +13,6 @@ export default async function askAI(prompt) {
         throw new Error("Server error: " + response.status);
     }
 
-    return await response.json(); // forventer { response: "..." }
+    // backend: { "response": "..." }
+    return await response.json();
 }

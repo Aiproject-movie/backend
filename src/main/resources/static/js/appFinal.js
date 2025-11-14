@@ -9,8 +9,8 @@ function initApp() {
 
 function setupEventListeners() {
     const chatForm = document.querySelector("#chat-form");
-    chatForm.addEventListener("submit", handleChatSubmit);
-
     const textarea = chatForm.querySelector("textarea");
+
+    chatForm.addEventListener("submit", handleChatSubmit);
     textarea.addEventListener("keydown", handleKeyDown);
 }
